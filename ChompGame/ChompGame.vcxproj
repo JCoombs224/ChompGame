@@ -22,7 +22,7 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{432ea1fa-ab1b-4197-a617-a758e3018264}</ProjectGuid>
-    <RootNamespace>Project1</RootNamespace>
+    <RootNamespace>ChompGame</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ProjectName>ChompGame</ProjectName>
   </PropertyGroup>
