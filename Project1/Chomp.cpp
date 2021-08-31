@@ -137,7 +137,7 @@ public:
 				if (boardGrid[i][j].isPlayable())
 					cout << "O ";
 				else
-					cout << "X ";
+					cout << ". ";
 			}
 			cout << endl;
 		}
@@ -208,7 +208,7 @@ int main()
 		"The top left coordinate is (1, 1) and the bottom right is (" << columns << ", " << rows << ").\n";
 	cout << "The game is won when the only piece the next player can eat is the top left piece.\n\n";
 	cout << "When entering a move type X followed by a space then Y.\n\n";
-	cout << "O - Active and playable piece.\nX - Chomped and unplayable piece.\n\n";
+	cout << "O - Active and playable piece.\n. - Chomped and unplayable piece.\n\n";
 
 	// Loops active game until a player has won
 	while (!continueProg)
