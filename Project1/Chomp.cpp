@@ -15,7 +15,19 @@
 *	left block is "poisoned" and the player who eats this loses.
 *********************************************
 *	FUNCTIONS:
-* <list functions UML diagram style>
+* + class Square
+*   - playable:bool = true
+*   + Square()
+*   + chomp()
+*   + isplayable():bool
+* + class Board
+*   - sizeX:unsigned int
+*   - sizeY:unsinged int
+*   - boardGrid:vector<Square>
+*   + Board(unsigned int, unsigned int)
+*   + doChomp(unsigned int, unsigned int):bool
+*   + isGameWon():bool
+*   + printBoard()
 *********************************************/
 
 /*********************************************
@@ -130,8 +142,16 @@ public:
 	// Print the game board with playable squares as 'O' and nonplayable as 'X'
 	void printBoard()
 	{
+		cout << "   ";
+		for (int i = 0; i < sizeX; i++)
+		{
+			cout << i+1 << ' ';
+		}
+		cout << "(m)" << endl;
+
 		for (int i = 0; i < sizeY; i++)
 		{
+			cout << ' ' << i + 1 << ' ';
 			for (int j = 0; j < sizeX; j++)
 			{
 				if (boardGrid[i][j].isPlayable())
@@ -141,7 +161,7 @@ public:
 			}
 			cout << endl;
 		}
-		cout << endl;
+		cout << "(n)\n\n";
 	}
 };
 
@@ -163,10 +183,10 @@ int main()
 		"A player wins when the only square the next player can eat is the poisned square in the top-left." << "\n\n";
 
 	// Get player names and create player objects
-	cout << "Enter player 1's name: ";
+	cout << "Enter Player 1's name: ";
 	cin >> player1;
 
-	cout << "Enter player 2's name: ";
+	cout << "Enter Player 2's name: ";
 	cin >> player2;
 
 
