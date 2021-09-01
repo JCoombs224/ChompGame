@@ -34,6 +34,7 @@
 *	SETUP STATEMENTS and PURPOSE:
 *********************************************/
 #include <iostream> //to output to console
+#include <string> // Allows string manipulation
 #include <vector> // To create an expandable data structure of objects
 using namespace std; //access namespace
 
@@ -184,10 +185,10 @@ int main()
 
 	// Get player names
 	cout << "Enter Player 1's name: ";
-	cin >> player1;
+	getline(cin, player1);
 
 	cout << "Enter Player 2's name: ";
-	cin >> player2;
+	getline(cin, player2);
 
 
 	// Get the size of the game board (m x n)
