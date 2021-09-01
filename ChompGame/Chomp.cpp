@@ -47,7 +47,7 @@ using namespace std; //access namespace
 
 /**
 * The square class represents a square on a game board is either playable or non-playable
-* if it was chomped,
+* if it was chomped.
 */
 class Square
 {
