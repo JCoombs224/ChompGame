@@ -1,9 +1,9 @@
 /********************************************
 *	DEVELOPER:	Jamison Coombs
-* COLLABORATORS: Professor Walker
+*	COLLABORATORS: Professor Walker
 *	COURSE:	CS226 Discrete Structures
 *	PROJECT:	<project #1>
-*	LAST MODIFIED:	8/30/2021
+*	LAST MODIFIED:	9/1/2021
 ********************************************/
 /********************************************
 *	Chomp.cpp
@@ -182,7 +182,7 @@ int main()
 		"At each turn the current player chooses a square and eats everything below and right of the chosen square." << endl <<
 		"A player wins when the only square the next player can eat is the poisned square in the top-left." << "\n\n";
 
-	// Get player names and create player objects
+	// Get player names
 	cout << "Enter Player 1's name: ";
 	cin >> player1;
 
@@ -193,9 +193,9 @@ int main()
 	// Get the size of the game board (m x n)
 	while (!continueProg)
 	{
-		cout << "Enter the number of columns (m) on the game board greater than 1: ";
+		cout << "Enter the number of columns (m) on the game board between 2-9: ";
 		cin >> columns;
-		if (columns > 1)
+		if (columns > 1 && columns < 10)
 			continueProg = true;
 		else
 			cerr << "Please give a valid input!\n\n";
@@ -203,9 +203,9 @@ int main()
 	continueProg = false;
 	while (!continueProg)
 	{
-		cout << "Enter the number of rows (n) on the game board greater than 1: ";
+		cout << "Enter the number of rows (n) on the game board between 2-9: ";
 		cin >> rows;
-		if (rows > 1)
+		if (rows > 1 && rows < 10)
 			continueProg = true;
 		else
 			cerr << "Please give a valid input!\n\n";
@@ -252,6 +252,7 @@ int main()
 		{
 			break; // break loop if game is won
 		}
+		// Set new current player
 		temp = currentPlayer;
 		currentPlayer = nextPlayer;
 		nextPlayer = temp;
@@ -260,6 +261,7 @@ int main()
 	// Print winning player
 	gameBoard.printBoard();
 	cout << currentPlayer << " wins!!\n\n";
+	system("pause"); // wait for input to close program
 
 	return 0;
 }
