@@ -2,11 +2,11 @@
 #include <iostream>
 
 // Constructor
-GameBoardLogic::GameBoardLogic(unsigned int m, unsigned int n)
+GameBoardLogic::GameBoardLogic(unsigned int w, unsigned int h)
 {
 	// Set the private size variables to the info given
-	sizeY = n;
-	sizeX = m;
+	sizeX = w;
+	sizeY = h;
 
 	// Create a 2d vector of game squares to create a grid
 	for (int i = 0; i < sizeY; i++)
@@ -23,6 +23,11 @@ GameBoardLogic::GameBoardLogic(unsigned int m, unsigned int n)
 		// Add column to current row
 		boardGrid.push_back(v1);
 	}
+}
+
+Square GameBoardLogic::getSquareAt(int x, int y)
+{
+	return boardGrid[y][x];
 }
 
 	// Execute chomp move on the board

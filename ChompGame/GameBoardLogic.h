@@ -19,6 +19,8 @@ public:
 	// Constructor (takes the amount of columns and rows and creates a new chomp board)
 	GameBoardLogic(unsigned int m, unsigned int n);
 
+	Square getSquareAt(int x, int y);
+
 	// Execute chomp move on the board
 	bool doChomp(unsigned int x, unsigned int y);
 
