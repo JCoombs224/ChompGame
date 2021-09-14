@@ -124,9 +124,8 @@ int main()
 			if (e.type == Event::MouseButtonPressed)
 				if (e.key.code == Mouse::Left)
 				{
-					if (GameBoard.getSquareAt(x, y).isPlayable())
+					if (GameBoard.doChomp(x, y))
 					{
-						GameBoard.doChomp(x, y);
 						chompedX = x;
 						chompedY = y;
 						animationFrame = 1;
@@ -136,9 +135,8 @@ int main()
 							window.close();
 						}
 					}
-					else
-						cout << "Not playable";
 				}
+
 		}
 
 		window.clear(sf::Color::White);
