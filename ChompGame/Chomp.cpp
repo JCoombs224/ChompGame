@@ -23,6 +23,8 @@ using namespace std;
 using namespace sf; // sfml namespace
 
 void inputGameDimensions(unsigned int&, unsigned int&);
+void animate(vector<vector<int>>&, int&, float, float&, int, int, int, int);
+
 
 /*********************************************
 *	MAIN PROGRAM:
@@ -47,9 +49,6 @@ int main()
 	// Create the game board logic
 	GameBoardLogic GameBoard(boardW, boardH);
 
-
-	srand(time(0));
-
 	// Create a render window
 	RenderWindow window(VideoMode(600, 600), "Chomp");
 
@@ -60,15 +59,16 @@ int main()
 	float vCenterY = (boardH * tW) / 2;
 	View view(Vector2f(vCenterX, vCenterY), Vector2f(size.x, size.y));
 
-	//view.move();
-	//view.zoom(-3.f);
+	// Set the windows view
 	window.setView(view);
 
+
+	/************************
+	* Window Objects
+	************************/
 	Texture t;
 	t.loadFromFile(TEXTURE_NAME);
 	Sprite s(t);
-
-	
 	// Scale sprite texture
 	s.setScale(TEXTURE_SCALE_XY, TEXTURE_SCALE_XY);
 
@@ -83,17 +83,29 @@ int main()
 
 		for (int j = 0; j < boardH; j++)
 		{
-			tempV.push_back(0);
+			tempV.push_back(1);
 		}
 		sGrid.push_back(tempV);
 	}
 
 	// Set first brick to poisned brick
-	sGrid[0][0] = 1;
+	sGrid[0][0] = 0;
+
+	// Animation variables - IM A BAD CODER
+	bool doAnimate = false;
+	int animationFrame = 10;
+	float deltaTime = 0.00f, totalTime = 0.00f;
+	Clock clock;
+	int chompedX, chompedY;
+
+	window.setVerticalSyncEnabled(true);
+
 
 	// Run window
 	while (window.isOpen())
 	{
+		deltaTime = clock.restart().asSeconds();
+
 		// Get mouse position
 		Vector2i mPosWindow = Mouse::getPosition(window);
 		Vector2f pos = window.mapPixelToCoords(mPosWindow);
@@ -102,8 +114,6 @@ int main()
 		
 		// Event handler
 		Event e;
-
-		window.setVerticalSyncEnabled(true);
 
 		while (window.pollEvent(e))
 		{
@@ -117,20 +127,24 @@ int main()
 					if (GameBoard.getSquareAt(x, y).isPlayable())
 					{
 						GameBoard.doChomp(x, y);
-						for (int i = x; i < boardW; i++)
-						{
-							for (int j = y; j < boardH; j++)
-								sGrid[i][j] = 5;
-						}
+						chompedX = x;
+						chompedY = y;
+						animationFrame = 1;
+
 						if (GameBoard.isGameWon())
 						{
 							window.close();
 						}
 					}
+					else
+						cout << "Not playable";
 				}
 		}
 
 		window.clear(sf::Color::White);
+
+		if(animationFrame < 5)
+			animate(sGrid, animationFrame, deltaTime, totalTime, chompedX, chompedY, boardW, boardH);
 
 		// Draw game board
 		for (int i = 0; i < boardW; i++)
@@ -181,4 +195,23 @@ void inputGameDimensions(unsigned int& x, unsigned int& y)
 		else
 			cerr << "Please give a valid input!\n\n";
 	}
+}
+
+void animate(vector<vector<int>>& grid, int& frame, float deltaTime, float& totalTime, int x, int y, int w, int h)
+{
+	float switchTime = 0.03;
+	totalTime += deltaTime;
+
+	if (totalTime >= switchTime)
+	{
+		for (int i = x; i < w; i++)
+		{
+			for (int j = y; j < h; j++)
+				if(grid[i][j] < 4) 
+					grid[i][j] = frame;
+		}
+		frame++;
+		totalTime -= switchTime;
+	}
+
 }
