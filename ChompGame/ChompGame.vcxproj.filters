@@ -24,12 +24,15 @@
     <ClCompile Include="Square.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RunGameOnConsole.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameBoardLogic.h">
+    <ClInclude Include="Square.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Square.h">
+    <ClInclude Include="GameBoardLogic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

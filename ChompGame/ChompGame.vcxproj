@@ -148,6 +148,7 @@
   <ItemGroup>
     <ClCompile Include="Chomp.cpp" />
     <ClCompile Include="GameBoardLogic.cpp" />
+    <ClCompile Include="RunGameOnConsole.cpp" />
     <ClCompile Include="Square.cpp" />
   </ItemGroup>
   <ItemGroup>
