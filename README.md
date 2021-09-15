@@ -8,12 +8,12 @@ which I will do in the future, but this project was mainly to learn and test out
   Customizable size of the game board!
 </b>
 <p>
-  <img src="img/customizable.png" width="700" ❯
+  <img src="img/customizable.gif" width="700" ❯
 </p>
  
 <b>
   Gameplay
 </b>
 <p>
-  <img src="img/gameplay.png" width="700" ❯
+  <img src="img/gameplay.gif" width="700" ❯
 </p>
