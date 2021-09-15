@@ -1,6 +1,6 @@
 /********************************************
 *	DEVELOPER:	Jamison Coombs
-*	LAST MODIFIED:	9/1/2021
+*	LAST MODIFIED:	9/14/2021
 ********************************************/
 /********************************************
 *	Chomp.cpp
@@ -18,6 +18,7 @@
 #include <string> // Allows string manipulation
 #include <vector> // To create an expandable data structure of objects
 #include "SFML/Graphics.hpp"
+#include "SFML/Audio.hpp"
 #include "GameBoardLogic.h"
 using namespace std;
 using namespace sf; // sfml namespace
@@ -40,6 +41,8 @@ int main()
 	// Instance Variables
 	unsigned int boardW = 8, boardH = 8; // Game board is 8x8 by defualt
 
+	srand((unsigned)time(NULL));
+
 	// First get the game options from console (update later to also be GUI based)
 	inputGameDimensions(boardW, boardH);
 
@@ -50,7 +53,10 @@ int main()
 	GameBoardLogic GameBoard(boardW, boardH);
 
 	// Create a render window
-	RenderWindow window(VideoMode(600, 600), "Chomp");
+	RenderWindow window(VideoMode(880, 600), "Chomp", sf::Style::Titlebar | sf::Style::Close);
+	Image icon;
+	icon.loadFromFile("res/chompicon.png");
+	window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
 	// Get the size of the window
 	Vector2u size = window.getSize();
@@ -71,6 +77,15 @@ int main()
 	Sprite s(t);
 	// Scale sprite texture
 	s.setScale(TEXTURE_SCALE_XY, TEXTURE_SCALE_XY);
+
+	SoundBuffer buffer[2];
+	if (!buffer[0].loadFromFile("res/sound/eat3.ogg"))
+		return -1;
+	if (!buffer[1].loadFromFile("res/sound/eat2.ogg"))
+		return -1;
+
+	Sound eatSnd;
+	eatSnd.setBuffer(buffer[1]);
 
 	// Create a 2d vector grid for the square sprites
 	vector<vector<int>> sGrid;
@@ -98,8 +113,37 @@ int main()
 	Clock clock;
 	int chompedX, chompedY;
 
+	Font font;
+	if (!font.loadFromFile(FONT_NAME))
+	{
+		cerr << "Unable to load font: " << FONT_NAME << endl;
+		return -1;
+	}
+
+	// Text to represent current player
+	Text playerTxt[2];
+	playerTxt[0].setFont(font);
+	playerTxt[1].setFont(font);
+	playerTxt[0].setString("Player 1's\n   Turn");
+	playerTxt[1].setString("Player 2's\n   Turn");
+	playerTxt[0].setCharacterSize(28);
+	playerTxt[1].setCharacterSize(28);
+	playerTxt[0].setFillColor(Color::Red);
+	playerTxt[1].setFillColor(Color::Green);
+	playerTxt[0].setOutlineColor(Color::Black);
+	playerTxt[1].setOutlineColor(Color::Black);
+	playerTxt[0].setOutlineThickness(3);
+	playerTxt[1].setOutlineThickness(3);
+	playerTxt[0].setStyle(Text::Bold);
+	playerTxt[1].setStyle(Text::Bold);
+	playerTxt[0].setPosition(-140, size.y / 200);
+	playerTxt[1].setPosition((vCenterX * 2) + 4, 0);
+
+	// 
+
 	window.setVerticalSyncEnabled(true);
 
+	bool player1Turn = true;
 
 	// Run window
 	while (window.isOpen())
@@ -130,16 +174,24 @@ int main()
 						chompedY = y;
 						animationFrame = 1;
 
+						eatSnd.setBuffer(buffer[rand() % 2]);
+						eatSnd.setPitch((float)(rand() % 100 + 75) / 100);
+						eatSnd.play();
+
 						if (GameBoard.isGameWon())
 						{
 							window.close();
+						}
+						else
+						{
+							player1Turn ? player1Turn = false : player1Turn = true;
 						}
 					}
 				}
 
 		}
 
-		window.clear(sf::Color::White);
+		window.clear(sf::Color::Color(18, 77, 122));
 
 		if(animationFrame < 5)
 			animate(sGrid, animationFrame, deltaTime, totalTime, chompedX, chompedY, boardW, boardH);
@@ -152,6 +204,12 @@ int main()
 				s.setPosition(i * tW, j * tW);
 				window.draw(s);
 			}
+
+		// Draw the player whos turn it is
+		if (player1Turn)
+			window.draw(playerTxt[0]);
+		else
+			window.draw(playerTxt[1]);
 
 		window.display();
 
