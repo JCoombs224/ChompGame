@@ -5,5 +5,5 @@ This is my first project using SFML libraries. I converted to the project to SFM
 which I will do in the future, but this project was mainly to learn and test out all the features that SFML brings.
 
 <p>
-  <img src="img2.png" width="700" ❯
+  <img src="img/2.png" width="700" ❯
 </p>
