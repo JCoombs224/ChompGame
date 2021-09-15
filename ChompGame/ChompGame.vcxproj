@@ -146,14 +146,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="Chomp.cpp" />
     <ClCompile Include="GameBoardLogic.cpp" />
     <ClCompile Include="RunGameOnConsole.cpp" />
     <ClCompile Include="Square.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Animation.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="GameBoardLogic.h" />
     <ClInclude Include="Square.h" />
   </ItemGroup>

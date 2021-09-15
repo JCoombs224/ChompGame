@@ -8,7 +8,7 @@ using namespace std;
 * The board class contains all the info needed to play a game of chomp.
 * It takes an m and n value and creates a board of squares of (m x n) size.
 */
-class GameBoardLogic
+class GameBoardLogic 
 {
 	// Private instance variables
 private:
@@ -19,8 +19,6 @@ public:
 	// Constructor (takes the amount of columns and rows and creates a new chomp board)
 	GameBoardLogic(unsigned int m, unsigned int n);
 
-	Square getSquareAt(int x, int y);
-
 	// Execute chomp move on the board
 	bool doChomp(unsigned int x, unsigned int y);
 
@@ -29,6 +27,8 @@ public:
 
 	// Print the game board with playable squares as 'O' and nonplayable as 'X'
 	void printBoardToConsole();
+
+	void resetBoard();
 	};
 
 

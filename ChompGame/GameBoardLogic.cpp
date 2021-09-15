@@ -25,16 +25,11 @@ GameBoardLogic::GameBoardLogic(unsigned int w, unsigned int h)
 	}
 }
 
-Square GameBoardLogic::getSquareAt(int x, int y)
-{
-	return boardGrid[y][x];
-}
-
 	// Execute chomp move on the board
 	bool GameBoardLogic::doChomp(unsigned int x, unsigned int y)
 	{
 		// First check if move is valid, if not return false
-		if (x < 0 || y < 0 || (x == 0 && y == 0) || x >= sizeX || y >= sizeY || (!boardGrid[y][x].isPlayable()))
+		if (x < 0 || y < 0 || ((x == 0 && y == 0) != isGameWon()) || x >= sizeX || y >= sizeY || (!boardGrid[y][x].isPlayable()))
 		{
 			std::cerr << "That move is not playable, try again...\n";
 			return false;
@@ -83,4 +78,24 @@ Square GameBoardLogic::getSquareAt(int x, int y)
 			cout << endl;
 		}
 		cout << "(n)\n\n";
+	}
+
+	void GameBoardLogic::resetBoard()
+	{
+		boardGrid.clear();
+		// Create a 2d vector of game squares to create a grid
+		for (int i = 0; i < sizeY; i++)
+		{
+			// Vector to store column game squares
+			vector<Square> v1;
+
+			// Fill columns of new game squares
+			for (int j = 0; j < sizeX; j++)
+			{
+				// Add square to column vector
+				v1.push_back(Square());
+			}
+			// Add column to current row
+			boardGrid.push_back(v1);
+		}
 	}
