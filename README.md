@@ -4,6 +4,16 @@ According to Wikipedia: "Chomp is a two-player strategy game played on a rectang
 This is my first project using SFML libraries. I converted to the project to SFML in a single day so the code is quite messy. I should have used more OOP style programming
 which I will do in the future, but this project was mainly to learn and test out all the features that SFML brings.
 
+<b>
+  Customizable size of the game board!
+</b>
 <p>
-  <img src="img/2.png" width="700" ❯
+  <img src="img/customizable.png" width="700" ❯
+</p>
+ 
+<b>
+  Gameplay
+</b>
+<p>
+  <img src="img/gameplay.png" width="700" ❯
 </p>
